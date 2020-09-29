@@ -28,8 +28,24 @@ $id = $data["id"];
 $poke = new Pokemon();
 $index = $data["id"];
 $name = $data["name"];
-echo $index. "\n";
-echo $name. "\n";
+$pokeTypes = $data["types"];
+$sprites = $data["sprites"];
+$front = $sprites["front_default"];
+foreach ($pokeTypes as $pokeType)
+    $types[] = $pokeType["type"]["name"];
+$type = join( ", ", $types);
+$moves = $data["moves"];
+$moveCount = count($moves);
+for($i = 0; $i <= $moveCount && $i<4; $i++)
+    $move[] = $moves[rand(1, $moveCount)]["move"]["name"];
+    array_splice($moves, $i);
+
+echo "<p>$index</p><br>";
+echo "<p>$name</p><br>";
+echo "<p>$type</p><br>";
+echo "<img src=".$front.">";
+foreach ($move as $thisMove)
+    echo "<p>$thisMove</p><br>";
 ?>
 <html lang="en">
 <head>
