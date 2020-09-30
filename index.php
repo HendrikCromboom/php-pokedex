@@ -4,20 +4,6 @@ ini_set("display_errors=1", "1");
 ini_set("display_startup_errors", "1");
 error_reporting(E_ALL);
 
-class Pokemon{
-   var string $index = "";
-   var string $name = "";
-   var array $types = [];
-   var string $type = "";
-   var string $sprites = "";
-   var string $front = "";
-   var array $moves = [];
-   var array $move = [];
-   var string $evo = "";
-   var string $evoFront= "";
-   var string $species = "";
-   var string $chain = "";
-}
 
 $name = $_POST['pokeNameOrId'];
 if($name===null){$name=1;}
@@ -25,7 +11,6 @@ $fetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$name."/");
 $data = json_decode($fetch, true);
 $id = $data["id"];
 
-$poke = new Pokemon();
 $index = $data["id"];
 $name = $data["name"];
 $pokeTypes = $data["types"];
