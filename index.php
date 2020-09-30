@@ -39,6 +39,7 @@ $moveCount = count($moves);
 for($i = 0; $i <= $moveCount && $i<4; $i++)
     $move[] = $moves[rand(1, $moveCount)]["move"]["name"];
     array_splice($moves, $i);
+$species = $data["species"];
 
 echo "<p>$index</p><br>";
 echo "<p>$name</p><br>";
