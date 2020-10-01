@@ -28,10 +28,22 @@ $chainData = json_decode($chainFetch, true);
 $chain = $chainData["evolution_chain"]["url"];
 $evoFetch = file_get_contents($chain);
 $evoData = json_decode($evoFetch, true);
-$evoName  = $evoData["chain"]["evolves_to"][0]["species"]["name"];
-$thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
-$thisEvoData = json_decode($thisEvoFetch, true);
-$evoFront = $thisEvoData["sprites"]["front_default"];
+$base= $evoData["chain"];
+$countEvo = count($base["evolves_to"]);
+$evolutions = array();
+$countEvo>1?getDemEvos($countEvo, $base):getOneEvo($base);
+function getDemEvos($countEvo, $base){
+    for($i=0; $i<$countEvo;$i++){array_push($evolutions, $base["evolves_to"][$i]["species"]["name"]);}
+    return $evolutions;
+}
+function getOneEvo($base){
+    array_push($evolutions, $base["species"]["name"]);
+}
+echo $evolutions;
+//$evoName  = $evoData["chain"]["evolves_to"][0]["species"]["name"];
+//$thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
+//$thisEvoData = json_decode($thisEvoFetch, true);
+//$evoFront = $thisEvoData["sprites"]["front_default"];
 
 echo "<p>$index</p><br>";
 echo "<p>$name</p><br>";
@@ -39,8 +51,7 @@ echo "<p>$type</p><br>";
 echo "<img src=".$front.">";
 foreach ($move as $thisMove)
     echo "<p>$thisMove</p><br>";
-echo "<p>$evoName</p><br>";
-echo "<img src=".$evoFront.">";
+//echo "<img src=".$evoFront.">";
 ?>
 <html lang="en">
 <head>
