@@ -19,8 +19,8 @@ foreach ($pokeTypes as $pokeType)
 $type = join( ", ", $types);
 $moves = $data["moves"];
 $moveCount = count($moves);
-for($i = 0; $i <= $moveCount && $i<4; $i++)
-    $move[] = $moves[rand(1, $moveCount)]["move"]["name"];
+for($i = 0; $i < $moveCount && $i<4; $i++)
+    $move[] = $moves[rand(1, $moveCount)-1]["move"]["name"];
     array_splice($moves, $i);
 $species = $data["species"]["url"];
 $chainFetch = file_get_contents($species);
@@ -37,17 +37,17 @@ echo "<p>$index</p><br>";
 echo "<p>$name</p><br>";
 echo "<p>$type</p><br>";
 echo "<p style="."background-color:".$color."><img src=".$front."></p>";
-foreach ($move as $thisMove)
-    echo "<p>$thisMove</p><br>";
+foreach ($move as $thisMove){
+    echo "<p>$thisMove</p><br>";}
 //echo "<img src=".$evoFront.">";
-if ($evoFrom!= null)
+if ($evoFrom!= null){
     $evoName = $evoFrom["name"];
     $thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
     $thisEvoData = json_decode($thisEvoFetch, true);
     $evoFront = $thisEvoData["sprites"]["front_default"];
     echo "<p>$name evolves from:</p><br>";
     echo "<p>$evoName</p><br>";
-    echo "<p><img src=".$evoFront."></p>";
+    echo "<p><img src=".$evoFront."></p>";}
 
 ?>
 <html lang="en">

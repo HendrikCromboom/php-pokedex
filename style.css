@@ -1,3 +1,9 @@
 p{
     border: gray 1px solid;
+    width: 33%;
+    padding: 10px;
+    text-align: center;
+    margin-right: 33%;
+    margin-left: 33%;
+    border-radius: 20px;
 }
