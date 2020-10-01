@@ -1,10 +1,5 @@
 <?php
-declare(strict_types=1);
-ini_set("display_errors=1", "1");
-ini_set("display_startup_errors", "1");
-error_reporting(E_ALL);
-
-
+declare(strict_types=1);//Makes PHP strong typed
 $name = $_POST['pokeNameOrId'];
 if($name===null){$name=1;}
 $fetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$name."/");
@@ -28,11 +23,6 @@ $chainData = json_decode($chainFetch, true);
 $color = $chainData["color"]["name"];
 $evoFrom = $chainData["evolves_from_species"];
 
-//$evoName  = $evoData["chain"]["evolves_to"][0]["species"]["name"];
-//$thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
-//$thisEvoData = json_decode($thisEvoFetch, true);
-//$evoFront = $thisEvoData["sprites"]["front_default"];
-
 echo "<div id='flex'><div class='sweet'><p>$index</p><br>";
 echo "<p>$name</p><br>";
 echo "<p style="."background-color:".$color."><img src=".$front."></p>";
@@ -40,7 +30,6 @@ echo "<p>$type</p><br>";
 foreach ($move as $thisMove){
     echo "<p>$thisMove</p><br> ";}
 echo "</div>";
-//echo "<img src=".$evoFront.">";
 if ($evoFrom!= null){
     $evoName = $evoFrom["name"];
     $thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
@@ -48,7 +37,7 @@ if ($evoFrom!= null){
     $evoFront = $thisEvoData["sprites"]["front_default"];
     echo "<div class='sweet'><p>$name evolves from:</p><br>";
     echo "<p>$evoName</p><br>";
-    echo "<p><img src=".$evoFront."></p></div>";}
+    echo "<p style="."background-color:".$color."><img src=".$evoFront."></p></div>";}
 echo "</div>";
 
 ?>
@@ -59,8 +48,8 @@ echo "</div>";
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="grid-container">
-    <table class="tablo">
+<div>
+    <table>
         <tr>
             <td>
                 <form autocomplete="off" action="index.php" method="post">
