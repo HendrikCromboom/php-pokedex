@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);//Makes PHP strong typed
+//Start of API calls and data handling
 $name = $_POST['pokeNameOrId'];
 if($name===null){$name=1;}
 $fetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$name."/");
@@ -10,8 +10,8 @@ $pokeTypes = $data["types"];
 $sprites = $data["sprites"];
 $front = $sprites["front_default"];
 foreach ($pokeTypes as $pokeType)
-    $types[] = $pokeType["type"]["name"];
-$type = join( ", ", $types);
+    $types[] = $pokeType["type"]["name"];// This is basically the optimal way of pushing to an array in php
+$type = join( ", ", $types);// types will always be present, will look into error handling later
 $moves = $data["moves"];
 $moveCount = count($moves);
 for($i = 0; $i < $moveCount && $i<4; $i++)
@@ -22,15 +22,15 @@ $chainFetch = file_get_contents($species);
 $chainData = json_decode($chainFetch, true);
 $color = $chainData["color"]["name"];
 $evoFrom = $chainData["evolves_from_species"];
-
-echo "<div id='flex'><div class='sweet'><p>$index</p><br>";
+//Start of echoing HTML with inline PHP
+echo "<div id='flex'><div class='sweet'><p>$index</p><br>";// Adding some css classes
 echo "<p>$name</p><br>";
 echo "<p style="."background-color:".$color."><img src=".$front."></p>";
 echo "<p>$type</p><br>";
 foreach ($move as $thisMove){
     echo "<p>$thisMove</p><br> ";}
-echo "</div>";
-if ($evoFrom!= null){
+echo "</div>";// div ends here
+if ($evoFrom!= null){// if the species evolves from isn't empty we execute the following
     $evoName = $evoFrom["name"];
     $thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
     $thisEvoData = json_decode($thisEvoFetch, true);
@@ -38,8 +38,8 @@ if ($evoFrom!= null){
     echo "<div class='sweet'><p>$name evolves from:</p><br>";
     echo "<p>$evoName</p><br>";
     echo "<p style="."background-color:".$color."><img src=".$evoFront."></p></div>";}
-echo "</div>";
-
+echo "</div>";//div outside so even IF there are no evo's it gets handled
+//Start of HTML form
 ?>
 <html lang="en">
 <head>
