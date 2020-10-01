@@ -33,21 +33,23 @@ $evoFrom = $chainData["evolves_from_species"];
 //$thisEvoData = json_decode($thisEvoFetch, true);
 //$evoFront = $thisEvoData["sprites"]["front_default"];
 
-echo "<p>$index</p><br>";
+echo "<div id='flex'><div class='sweet'><p>$index</p><br>";
 echo "<p>$name</p><br>";
-echo "<p>$type</p><br>";
 echo "<p style="."background-color:".$color."><img src=".$front."></p>";
+echo "<p>$type</p><br>";
 foreach ($move as $thisMove){
-    echo "<p>$thisMove</p><br>";}
+    echo "<p>$thisMove</p><br> ";}
+echo "</div>";
 //echo "<img src=".$evoFront.">";
 if ($evoFrom!= null){
     $evoName = $evoFrom["name"];
     $thisEvoFetch = file_get_contents("https://pokeapi.co/api/v2/pokemon/".$evoName. "/");
     $thisEvoData = json_decode($thisEvoFetch, true);
     $evoFront = $thisEvoData["sprites"]["front_default"];
-    echo "<p>$name evolves from:</p><br>";
+    echo "<div class='sweet'><p>$name evolves from:</p><br>";
     echo "<p>$evoName</p><br>";
-    echo "<p><img src=".$evoFront."></p>";}
+    echo "<p><img src=".$evoFront."></p></div>";}
+echo "</div>";
 
 ?>
 <html lang="en">
