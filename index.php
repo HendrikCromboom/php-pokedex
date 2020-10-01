@@ -53,6 +53,7 @@ if ($evoFrom!= null)
 <head>
     <meta charset="UTF-8">
     <title>Pokedex</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="grid-container">
