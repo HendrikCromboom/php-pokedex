@@ -1,4 +1,4 @@
-<?php
+<?php//Might add OOP again now that I noticed I made a typo... Will do after campus hours
 //Start of API calls and data handling
 $name = $_POST['pokeNameOrId'];
 if($name===null){$name=1;}
