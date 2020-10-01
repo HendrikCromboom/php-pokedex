@@ -25,6 +25,7 @@ for($i = 0; $i <= $moveCount && $i<4; $i++)
 $species = $data["species"]["url"];
 $chainFetch = file_get_contents($species);
 $chainData = json_decode($chainFetch, true);
+$color = $chainData["color"]["name"];
 $evoFrom = $chainData["evolves_from_species"];
 
 //$evoName  = $evoData["chain"]["evolves_to"][0]["species"]["name"];
@@ -35,7 +36,7 @@ $evoFrom = $chainData["evolves_from_species"];
 echo "<p>$index</p><br>";
 echo "<p>$name</p><br>";
 echo "<p>$type</p><br>";
-echo "<img src=".$front.">";
+echo "<p style="."background-color:".$color."><img src=".$front."></p>";
 foreach ($move as $thisMove)
     echo "<p>$thisMove</p><br>";
 //echo "<img src=".$evoFront.">";
@@ -46,7 +47,7 @@ if ($evoFrom!= null)
     $evoFront = $thisEvoData["sprites"]["front_default"];
     echo "<p>$name evolves from:</p><br>";
     echo "<p>$evoName</p><br>";
-    echo "<img src=".$evoFront.">";
+    echo "<p><img src=".$evoFront."></p>";
 
 ?>
 <html lang="en">
